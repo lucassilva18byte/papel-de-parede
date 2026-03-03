@@ -9,7 +9,10 @@ body {
   background: black;
 }
 
+/* ========================= */
 /* CENA PRINCIPAL */
+/* ========================= */
+
 .scene {
   position: relative;
   width: 100vw;
@@ -17,23 +20,32 @@ body {
   overflow: hidden;
 }
 
-/* IMAGEM PERFEITAMENTE AJUSTADA */
+/* ========================= */
+/* FUNDO (IMAGEM) */
+/* ========================= */
+
 .background {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background: url("wallpaper.jpg") center center no-repeat;
+  width: 100%;
+  height: 100%;
+  background-image: url("./wallpaper.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
   animation: slowZoom 40s ease-in-out infinite alternate;
   filter: brightness(0.95) contrast(1.1);
+  z-index: 1;
 }
 
 @keyframes slowZoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.03); }
+  to { transform: scale(1.03); }
 }
 
-/* BRILHO NAS JANELAS */
+/* ========================= */
+/* BRILHO DO CASTELO */
+/* ========================= */
+
 .castle-glow {
   position: absolute;
   width: 100%;
@@ -43,14 +55,18 @@ body {
     transparent 45%);
   animation: castlePulse 4s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: 2;
 }
 
 @keyframes castlePulse {
   from { opacity: 0.4; }
-  to   { opacity: 0.7; }
+  to { opacity: 0.7; }
 }
 
-/* GLOW DA LUA */
+/* ========================= */
+/* LUA */
+/* ========================= */
+
 .moon-glow {
   position: absolute;
   top: 10%;
@@ -63,48 +79,100 @@ body {
     transparent 70%);
   animation: moonPulse 6s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: 2;
 }
 
 @keyframes moonPulse {
   from { opacity: 0.3; }
-  to   { opacity: 0.6; }
+  to { opacity: 0.6; }
 }
 
+/* ========================= */
 /* NÉVOA */
+/* ========================= */
+
 .fog {
   position: absolute;
   width: 200%;
   height: 100%;
-  background: url("fog.png") repeat-x;
+  background: url("./fog.png") repeat-x;
   opacity: 0.25;
   animation: fogMove 80s linear infinite;
   pointer-events: none;
+  z-index: 3;
 }
 
 @keyframes fogMove {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to { transform: translateX(-50%); }
 }
 
-/* TOCHAS */
+/* ========================= */
+/* FOGO REALISTA */
+/* ========================= */
+
 .fire-left,
 .fire-right {
   position: absolute;
   bottom: 18%;
-  width: 180px;
-  height: 260px;
+  width: 160px;
+  height: 300px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* chama externa */
+.fire-left::before,
+.fire-right::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 80%,
+    rgba(255,180,0,1) 0%,
+    rgba(255,80,0,0.9) 30%,
+    rgba(255,0,0,0.6) 55%,
+    transparent 75%);
+  border-radius: 50% 50% 40% 40%;
+  filter: blur(8px);
+  animation: flameMove 0.25s infinite ease-in-out alternate;
+}
+
+/* chama interna quente */
+.fire-left::after,
+.fire-right::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 70%;
+  left: 20%;
+  bottom: 0;
   background: radial-gradient(circle,
+    rgba(255,255,180,1),
     rgba(255,140,0,0.9),
-    rgba(255,0,0,0.6),
     transparent 70%);
-  filter: blur(30px);
-  animation: flicker 0.15s infinite alternate;
+  border-radius: 50%;
+  filter: blur(6px);
+  animation: flameInner 0.18s infinite ease-in-out alternate;
 }
 
 .fire-left { left: 6%; }
 .fire-right { right: 6%; }
 
-@keyframes flicker {
-  from { transform: scale(1); opacity: 0.8; }
-  to   { transform: scale(1.1); opacity: 1; }
+@keyframes flameMove {
+  from {
+    transform: scaleY(1) scaleX(1);
+  }
+  to {
+    transform: scaleY(1.15) scaleX(0.9) translateY(-12px);
+  }
+}
+
+@keyframes flameInner {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2) translateY(-8px);
+  }
 }
