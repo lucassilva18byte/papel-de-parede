@@ -9,60 +9,90 @@ body {
   background: black;
 }
 
-/* CENA */
 .scene {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  animation: drift 12s ease-in-out infinite alternate;
+  animation: drift 15s ease-in-out infinite alternate;
 }
 
 @keyframes drift {
-  from { transform: translateX(-8px) translateY(-4px); }
-  to   { transform: translateX(8px) translateY(4px); }
+  from { transform: translateX(-6px) translateY(-3px); }
+  to   { transform: translateX(6px) translateY(3px); }
 }
 
-/* IMAGEM PRINCIPAL */
+/* IMAGEM BASE */
 .background {
   position: absolute;
   width: 110%;
   height: 110%;
   background: url("wallpaper.jpg") center center / cover no-repeat;
-  animation: zoom 25s ease-in-out infinite alternate;
+  animation: zoom 30s ease-in-out infinite alternate;
   filter: brightness(0.9) contrast(1.1);
 }
 
 @keyframes zoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.06); }
+  to   { transform: scale(1.05); }
 }
 
-/* GLOW DA LUA */
-.moon-glow {
+/* BRILHO NAS JANELAS DO CASTELO */
+.castle-glow {
   position: absolute;
-  top: 8%;
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
-  animation: moonPulse 6s ease-in-out infinite alternate;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 35%,
+    rgba(255,180,60,0.3),
+    transparent 40%);
+  animation: glowPulse 4s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
-@keyframes moonPulse {
-  from { opacity: 0.4; }
-  to   { opacity: 0.8; }
+@keyframes glowPulse {
+  from { opacity: 0.3; }
+  to   { opacity: 0.6; }
 }
 
-/* NÉVOA */
+/* ESTRELAS PISCANDO */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.15;
+  animation: starTwinkle 3s infinite alternate;
+}
+
+@keyframes starTwinkle {
+  from { opacity: 0.1; }
+  to   { opacity: 0.25; }
+}
+
+/* NUVENS SE MOVENDO */
+.clouds {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: url("clouds.png") repeat-x;
+  opacity: 0.2;
+  animation: cloudMove 120s linear infinite;
+}
+
+@keyframes cloudMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* NÉVOA PROFUNDA */
 .fog {
   position: absolute;
   width: 200%;
   height: 100%;
   background: url("fog.png") repeat-x;
   opacity: 0.25;
-  animation: fogMove 60s linear infinite;
+  animation: fogMove 70s linear infinite;
 }
 
 @keyframes fogMove {
@@ -70,7 +100,7 @@ body {
   to   { transform: translateX(-50%); }
 }
 
-/* FOGO */
+/* TOCHAS */
 .fire-left,
 .fire-right {
   position: absolute;
@@ -78,8 +108,8 @@ body {
   width: 200px;
   height: 300px;
   background: radial-gradient(circle,
-    rgba(255,140,0,0.9) 0%,
-    rgba(255,0,0,0.5) 40%,
+    rgba(255,140,0,0.9),
+    rgba(255,0,0,0.5),
     transparent 70%);
   filter: blur(30px);
   animation: flicker 0.15s infinite alternate;
@@ -90,28 +120,14 @@ body {
 
 @keyframes flicker {
   from { transform: scale(1); opacity: 0.8; }
-  to   { transform: scale(1.1); opacity: 1; }
-}
-
-/* PARTICULAS */
-#particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+  to   { transform: scale(1.15); opacity: 1; }
 }
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
-  .moon-glow {
-    width: 250px;
-    height: 250px;
-    left: 40%;
-  }
-
   .fire-left,
   .fire-right {
-    width: 140px;
+    width: 120px;
     height: 200px;
   }
 }
