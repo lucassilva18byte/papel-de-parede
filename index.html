@@ -1,104 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Fantasy Animated Wallpaper</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: #050505;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        /* Camada 1: O Fundo */
-        .background {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('bg.jpg') no-repeat center center;
-            background-size: cover;
-            z-index: 1;
-        }
-
-        /* Camada 2: Névoa Animada */
-        .fog {
-            position: absolute;
-            width: 200%; height: 100%;
-            background: url('https://raw.githubusercontent.com/AnandChowdhary/u-wave/main/assets/fog.png');
-            background-size: contain;
-            opacity: 0.4;
-            z-index: 2;
-            animation: moveFog 40s linear infinite;
-            bottom: -10%;
-        }
-
-        /* Camada 3: Personagens */
-        .character-group {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            align-items: flex-end;
-            gap: 5vw;
-            margin-bottom: 5vh;
-        }
-
-        .knight, .princess {
-            height: 60vh; /* Ajusta o tamanho proporcional à tela */
-            filter: drop-shadow(0 0 15px rgba(0,0,0,0.7));
-            animation: breathe 5s ease-in-out infinite;
-        }
-
-        .princess {
-            animation-delay: 0.5s; /* Desencontro leve para parecer real */
-        }
-
-        /* ANIMAÇÕES */
-
-        @keyframes breathe {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.01); }
-        }
-
-        @keyframes moveFog {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* Ajustes para Celular */
-        @media (max-width: 768px) {
-            .character-group {
-                flex-direction: row;
-                gap: 20px;
-            }
-            .knight, .princess {
-                height: 40vh;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Fantasy Wallpaper</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container">
-        <div class="background"></div>
-        <div class="fog"></div>
-        
-        <div class="character-group">
-            <img src="knight.png" class="knight" alt="Knight">
-            <img src="princess.png" class="princess" alt="Princess">
-        </div>
-    </div>
-
+<div class="wallpaper">
+    <img src="castelo.png" class="layer castelo">
+    <img src="lua.png" class="layer lua">
+    <img src="nevoa.png" class="layer nevoa">
+    <img src="fogueira.png" class="layer fogueira">
+    <img src="cavaleiro.png" class="layer cavaleiro">
+    <img src="princesa.png" class="layer princesa">
+</div>
+<canvas id="particles"></canvas>
+<script src="script.js"></script>
 </body>
 </html>
