@@ -1,5 +1,5 @@
-// Pequeno efeito extra de brilho dinâmico na lua
+// Brilho pulsante da lua (efeito cinematográfico)
 setInterval(() => {
-  const moon = document.querySelector(".moon");
-  moon.style.boxShadow = `0 0 ${50 + Math.random()*20}px rgba(255,255,255,0.7)`;
-}, 1000);
+  document.querySelector(".background").style.filter =
+    `brightness(${0.85 + Math.random()*0.1}) contrast(1.1)`;
+}, 2000);
