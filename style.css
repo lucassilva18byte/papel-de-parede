@@ -10,129 +10,76 @@ body {
 }
 
 .scene {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
+  overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-/* ========================= */
-/* IMAGEM CENTRAL */
-/* ========================= */
-
-.image-wrapper {
-  position: relative;
-  height: 100vh;
-}
+/* IMAGEM */
 
 .main-image {
   height: 100vh;
   width: auto;
-  display: block;
-  animation: cameraMove 40s ease-in-out infinite alternate;
+  animation: cameraZoom 40s ease-in-out infinite alternate;
+  transition: transform 0.2s ease-out;
 }
 
-@keyframes cameraMove {
+@keyframes cameraZoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.03); }
+  to   { transform: scale(1.04); }
 }
 
-/* ========================= */
-/* FOGO POSICIONADO NA IMAGEM */
-/* ========================= */
-
-.fire-left,
-.fire-right {
-  position: absolute;
-  bottom: 27%;
-  width: 150px;
-  height: 280px;
-}
-
-.fire-left { left: 12%; }
-.fire-right { right: 12%; }
-
-.fire-left::before,
-.fire-right::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 85%,
-    rgba(255,200,0,1),
-    rgba(255,80,0,0.8),
-    transparent 80%);
-  border-radius: 50%;
-  filter: blur(10px);
-  animation: flameRise 0.2s infinite ease-in-out alternate;
-}
-
-@keyframes flameRise {
-  from { transform: scaleY(1); }
-  to { transform: scaleY(1.25) translateY(-15px); }
-}
-
-/* ========================= */
-/* PARTÍCULAS MÁGICAS */
-/* ========================= */
-
-.magic-particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle,
-    rgba(180,0,255,0.5) 0%,
-    transparent 60%);
-  mix-blend-mode: screen;
-  animation: magicPulse 3s infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes magicPulse {
-  from { opacity: 0.2; }
-  to { opacity: 0.6; }
-}
-
-/* ========================= */
-/* NUVENS */
-/* ========================= */
-
-.clouds {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  background: url("./fog.png") repeat-x;
-  opacity: 0.2;
-  animation: cloudsMove 120s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes cloudsMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ========================= */
-/* LUA */
-/* ========================= */
+/* LUA RESPIRANDO */
 
 .moon-glow {
   position: absolute;
-  top: 10%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
   height: 500px;
   background: radial-gradient(circle,
-    rgba(255,255,255,0.5),
+    rgba(255,255,255,0.35),
     transparent 70%);
-  animation: moonPulse 6s infinite alternate;
+  animation: moonPulse 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
 @keyframes moonPulse {
-  from { opacity: 0.4; }
-  to { opacity: 0.8; }
+  from { opacity: 0.3; }
+  to   { opacity: 0.6; }
+}
+
+/* BRILHO MÁGICO NA PARTE INFERIOR (vestido) */
+
+.magic-glow {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(circle,
+    rgba(150,0,255,0.3),
+    transparent 70%);
+  animation: magicPulse 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes magicPulse {
+  from { opacity: 0.2; }
+  to   { opacity: 0.5; }
+}
+
+/* CANVAS */
+
+#particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
