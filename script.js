@@ -1,4 +1,13 @@
-const image = document.querySelector(".main-image");
+const bg = document.getElementById("bg");
+
+document.addEventListener("mousemove", e=>{
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+});
+
+/* Partículas mágicas */
+
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -7,43 +16,36 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for (let i = 0; i < 40; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: canvas.height + Math.random() * 200,
-    size: Math.random() * 3 + 1,
-    speed: Math.random() * 1 + 0.5
-  });
+for(let i=0;i<80;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        size:Math.random()*2 + 1,
+        speedY:Math.random()*0.4 + 0.1,
+        color: Math.random() > 0.5 
+            ? "rgba(255,215,150,0.6)" 
+            : "rgba(170,120,255,0.6)"
+    });
 }
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  ctx.fillStyle = "rgba(255,120,0,0.7)";
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.fill();
 
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
+        p.y -= p.speedY;
 
-    p.y -= p.speed;
+        if(p.y < 0){
+            p.y = canvas.height;
+            p.x = Math.random()*canvas.width;
+        }
+    });
 
-    if (p.y < 0) {
-      p.y = canvas.height + 50;
-      p.x = Math.random() * canvas.width;
-    }
-  });
-
-  requestAnimationFrame(animateParticles);
+    requestAnimationFrame(animate);
 }
 
-animateParticles();
-
-/* PARALLAX SUAVE */
-
-document.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 20;
-  const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-  image.style.transform = `scale(1.04) translate(${x}px, ${y}px)`;
-});
+animate();
