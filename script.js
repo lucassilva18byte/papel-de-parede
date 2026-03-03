@@ -4,12 +4,12 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particlesArray = [];
+let particles = [];
 
 class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
-    this.y = canvas.height * 0.7 + Math.random() * 100;
+    this.y = canvas.height * 0.7 + Math.random() * 150;
     this.size = Math.random() * 4 + 1;
     this.speedY = Math.random() * 1 + 0.5;
     this.opacity = 1;
@@ -17,7 +17,7 @@ class Particle {
 
   update() {
     this.y -= this.speedY;
-    this.opacity -= 0.005;
+    this.opacity -= 0.004;
   }
 
   draw() {
@@ -29,21 +29,20 @@ class Particle {
 }
 
 function init() {
-  for (let i = 0; i < 150; i++) {
-    particlesArray.push(new Particle());
+  for (let i = 0; i < 120; i++) {
+    particles.push(new Particle());
   }
 }
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  particlesArray.forEach((particle, index) => {
-    particle.update();
-    particle.draw();
-
-    if (particle.opacity <= 0) {
-      particlesArray.splice(index, 1);
-      particlesArray.push(new Particle());
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.opacity <= 0) {
+      particles.splice(i, 1);
+      particles.push(new Particle());
     }
   });
 

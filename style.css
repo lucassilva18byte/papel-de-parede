@@ -9,44 +9,43 @@ body {
   background: black;
 }
 
-/* ===== CENA PRINCIPAL ===== */
+/* CENA */
 .scene {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-
   animation: drift 12s ease-in-out infinite alternate;
 }
 
 @keyframes drift {
-  from { transform: translateX(-10px) translateY(-5px); }
-  to   { transform: translateX(10px) translateY(5px); }
+  from { transform: translateX(-8px) translateY(-4px); }
+  to   { transform: translateX(8px) translateY(4px); }
 }
 
-/* ===== BACKGROUND ===== */
+/* IMAGEM PRINCIPAL */
 .background {
   position: absolute;
   width: 110%;
   height: 110%;
   background: url("wallpaper.jpg") center center / cover no-repeat;
-  animation: cinematicZoom 25s ease-in-out infinite alternate;
-  filter: brightness(0.9) contrast(1.1) saturate(1.05);
+  animation: zoom 25s ease-in-out infinite alternate;
+  filter: brightness(0.9) contrast(1.1);
 }
 
-@keyframes cinematicZoom {
+@keyframes zoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.08); }
+  to   { transform: scale(1.06); }
 }
 
-/* ===== GLOW DA LUA ===== */
+/* GLOW DA LUA */
 .moon-glow {
   position: absolute;
   top: 8%;
-  left: 55%;
+  left: 50%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
   animation: moonPulse 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -56,7 +55,7 @@ body {
   to   { opacity: 0.8; }
 }
 
-/* ===== NÉVOA ===== */
+/* NÉVOA */
 .fog {
   position: absolute;
   width: 200%;
@@ -64,7 +63,6 @@ body {
   background: url("fog.png") repeat-x;
   opacity: 0.25;
   animation: fogMove 60s linear infinite;
-  pointer-events: none;
 }
 
 @keyframes fogMove {
@@ -72,21 +70,19 @@ body {
   to   { transform: translateX(-50%); }
 }
 
-/* ===== FOGO ===== */
+/* FOGO */
 .fire-left,
 .fire-right {
   position: absolute;
-  bottom: 18%;
-  width: 220px;
-  height: 320px;
+  bottom: 20%;
+  width: 200px;
+  height: 300px;
   background: radial-gradient(circle,
     rgba(255,140,0,0.9) 0%,
-    rgba(255,69,0,0.6) 30%,
-    rgba(255,0,0,0.4) 50%,
+    rgba(255,0,0,0.5) 40%,
     transparent 70%);
   filter: blur(30px);
   animation: flicker 0.15s infinite alternate;
-  pointer-events: none;
 }
 
 .fire-left { left: 8%; }
@@ -94,10 +90,10 @@ body {
 
 @keyframes flicker {
   from { transform: scale(1); opacity: 0.8; }
-  to   { transform: scale(1.12); opacity: 1; }
+  to   { transform: scale(1.1); opacity: 1; }
 }
 
-/* ===== PARTICULAS ===== */
+/* PARTICULAS */
 #particles {
   position: absolute;
   top: 0;
@@ -105,26 +101,17 @@ body {
   pointer-events: none;
 }
 
-/* ===== RESPONSIVO ===== */
+/* RESPONSIVO */
 @media (max-width: 768px) {
-
-  .background {
-    animation-duration: 35s;
-  }
-
-  .scene {
-    animation-duration: 16s;
-  }
-
   .moon-glow {
     width: 250px;
     height: 250px;
-    left: 50%;
+    left: 40%;
   }
 
   .fire-left,
   .fire-right {
-    width: 150px;
-    height: 220px;
+    width: 140px;
+    height: 200px;
   }
 }
