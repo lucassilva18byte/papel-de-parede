@@ -4,58 +4,51 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+let particlesArray = [];
 
-// Criar partículas
-function createParticles() {
-  for (let i = 0; i < 120; i++) {
-    particles.push({
-      x: canvas.width / 2 + (Math.random() * 300 - 150),
-      y: canvas.height * 0.75 + (Math.random() * 50),
-      size: Math.random() * 4 + 1,
-      speedY: Math.random() * 1 + 0.5,
-      opacity: Math.random(),
-    });
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height * 0.7 + Math.random() * 100;
+    this.size = Math.random() * 4 + 1;
+    this.speedY = Math.random() * 1 + 0.5;
+    this.opacity = 1;
+  }
+
+  update() {
+    this.y -= this.speedY;
+    this.opacity -= 0.005;
+  }
+
+  draw() {
+    ctx.fillStyle = `rgba(170,0,255,${this.opacity})`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
   }
 }
 
-function drawParticles() {
+function init() {
+  for (let i = 0; i < 150; i++) {
+    particlesArray.push(new Particle());
+  }
+}
+
+function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach((p) => {
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(150, 0, 255, ${p.opacity})`;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "purple";
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
+  particlesArray.forEach((particle, index) => {
+    particle.update();
+    particle.draw();
 
-    p.y -= p.speedY;
-    p.opacity -= 0.002;
-
-    if (p.opacity <= 0) {
-      p.y = canvas.height * 0.75;
-      p.opacity = Math.random();
+    if (particle.opacity <= 0) {
+      particlesArray.splice(index, 1);
+      particlesArray.push(new Particle());
     }
   });
 
-  requestAnimationFrame(drawParticles);
+  requestAnimationFrame(animate);
 }
 
-createParticles();
-drawParticles();
-
-/* Parallax leve com mouse */
-document.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 20;
-  const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-  document.querySelector(".background").style.transform =
-    `translate(${x}px, ${y}px) scale(1.05)`;
-});
-
-/* Brilho dinâmico da lua */
-setInterval(() => {
-  document.querySelector(".background").style.filter =
-    `brightness(${0.85 + Math.random()*0.1}) contrast(1.1)`;
-}, 3000);
+init();
+animate();
