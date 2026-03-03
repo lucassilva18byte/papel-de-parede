@@ -10,7 +10,7 @@ body {
 }
 
 /* ========================= */
-/* CENA PRINCIPAL */
+/* CENA */
 /* ========================= */
 
 .scene {
@@ -21,46 +21,23 @@ body {
 }
 
 /* ========================= */
-/* FUNDO (IMAGEM) */
+/* IMAGEM PRINCIPAL */
 /* ========================= */
 
 .background {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url("./wallpaper.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation: slowZoom 40s ease-in-out infinite alternate;
-  filter: brightness(0.95) contrast(1.1);
+  background: url("./wallpaper.jpg") center center no-repeat;
+  background-size: contain; /* não corta o casal */
+  background-color: black;
+  animation: cameraMove 40s ease-in-out infinite alternate;
   z-index: 1;
 }
 
-@keyframes slowZoom {
+@keyframes cameraMove {
   from { transform: scale(1); }
-  to { transform: scale(1.03); }
-}
-
-/* ========================= */
-/* BRILHO DO CASTELO */
-/* ========================= */
-
-.castle-glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 35%,
-    rgba(255,180,80,0.35),
-    transparent 45%);
-  animation: castlePulse 4s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 2;
-}
-
-@keyframes castlePulse {
-  from { opacity: 0.4; }
-  to { opacity: 0.7; }
+  to   { transform: scale(1.03); }
 }
 
 /* ========================= */
@@ -69,13 +46,13 @@ body {
 
 .moon-glow {
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle,
-    rgba(255,255,255,0.5),
+    rgba(255,255,255,0.6),
     transparent 70%);
   animation: moonPulse 6s ease-in-out infinite alternate;
   pointer-events: none;
@@ -83,28 +60,28 @@ body {
 }
 
 @keyframes moonPulse {
-  from { opacity: 0.3; }
-  to { opacity: 0.6; }
+  from { opacity: 0.4; }
+  to   { opacity: 0.8; }
 }
 
 /* ========================= */
-/* NÉVOA */
+/* NUVENS */
 /* ========================= */
 
-.fog {
+.clouds {
   position: absolute;
   width: 200%;
   height: 100%;
   background: url("./fog.png") repeat-x;
   opacity: 0.25;
-  animation: fogMove 80s linear infinite;
+  animation: cloudsMove 120s linear infinite;
   pointer-events: none;
   z-index: 3;
 }
 
-@keyframes fogMove {
+@keyframes cloudsMove {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ========================= */
@@ -114,12 +91,14 @@ body {
 .fire-left,
 .fire-right {
   position: absolute;
-  bottom: 18%;
-  width: 160px;
-  height: 300px;
-  pointer-events: none;
+  bottom: 22%;
+  width: 180px;
+  height: 320px;
   z-index: 4;
 }
+
+.fire-left { left: 14%; }
+.fire-right { right: 14%; }
 
 /* chama externa */
 .fire-left::before,
@@ -128,17 +107,17 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 80%,
-    rgba(255,180,0,1) 0%,
-    rgba(255,80,0,0.9) 30%,
-    rgba(255,0,0,0.6) 55%,
-    transparent 75%);
+  background: radial-gradient(circle at 50% 85%,
+    rgba(255,200,0,1) 0%,
+    rgba(255,100,0,0.9) 30%,
+    rgba(255,0,0,0.6) 60%,
+    transparent 80%);
   border-radius: 50% 50% 40% 40%;
-  filter: blur(8px);
-  animation: flameMove 0.25s infinite ease-in-out alternate;
+  filter: blur(10px);
+  animation: flameRise 0.2s infinite ease-in-out alternate;
 }
 
-/* chama interna quente */
+/* chama interna */
 .fire-left::after,
 .fire-right::after {
   content: "";
@@ -153,18 +132,15 @@ body {
     transparent 70%);
   border-radius: 50%;
   filter: blur(6px);
-  animation: flameInner 0.18s infinite ease-in-out alternate;
+  animation: flameInner 0.15s infinite ease-in-out alternate;
 }
 
-.fire-left { left: 6%; }
-.fire-right { right: 6%; }
-
-@keyframes flameMove {
+@keyframes flameRise {
   from {
     transform: scaleY(1) scaleX(1);
   }
   to {
-    transform: scaleY(1.15) scaleX(0.9) translateY(-12px);
+    transform: scaleY(1.25) scaleX(0.85) translateY(-15px);
   }
 }
 
@@ -173,6 +149,6 @@ body {
     transform: scale(1);
   }
   to {
-    transform: scale(1.2) translateY(-8px);
+    transform: scale(1.3) translateY(-10px);
   }
 }
