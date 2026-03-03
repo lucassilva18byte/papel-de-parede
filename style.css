@@ -5,34 +5,33 @@
 }
 
 body {
-  overflow: hidden;
   background: black;
+  overflow: hidden;
 }
-
-/* ========================= */
-/* CENA */
-/* ========================= */
 
 .scene {
-  position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ========================= */
-/* IMAGEM PRINCIPAL */
+/* IMAGEM CENTRAL */
 /* ========================= */
 
-.background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url("./wallpaper.jpg") center center no-repeat;
-  background-size: contain; /* não corta o casal */
-  background-color: black;
+.image-wrapper {
+  position: relative;
+  height: 100vh;
+}
+
+.main-image {
+  height: 100vh;
+  width: auto;
+  display: block;
   animation: cameraMove 40s ease-in-out infinite alternate;
-  z-index: 1;
 }
 
 @keyframes cameraMove {
@@ -41,27 +40,59 @@ body {
 }
 
 /* ========================= */
-/* LUA */
+/* FOGO POSICIONADO NA IMAGEM */
 /* ========================= */
 
-.moon-glow {
+.fire-left,
+.fire-right {
   position: absolute;
-  top: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle,
-    rgba(255,255,255,0.6),
-    transparent 70%);
-  animation: moonPulse 6s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 2;
+  bottom: 27%;
+  width: 150px;
+  height: 280px;
 }
 
-@keyframes moonPulse {
-  from { opacity: 0.4; }
-  to   { opacity: 0.8; }
+.fire-left { left: 12%; }
+.fire-right { right: 12%; }
+
+.fire-left::before,
+.fire-right::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 85%,
+    rgba(255,200,0,1),
+    rgba(255,80,0,0.8),
+    transparent 80%);
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: flameRise 0.2s infinite ease-in-out alternate;
+}
+
+@keyframes flameRise {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(1.25) translateY(-15px); }
+}
+
+/* ========================= */
+/* PARTÍCULAS MÁGICAS */
+/* ========================= */
+
+.magic-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle,
+    rgba(180,0,255,0.5) 0%,
+    transparent 60%);
+  mix-blend-mode: screen;
+  animation: magicPulse 3s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes magicPulse {
+  from { opacity: 0.2; }
+  to { opacity: 0.6; }
 }
 
 /* ========================= */
@@ -73,82 +104,35 @@ body {
   width: 200%;
   height: 100%;
   background: url("./fog.png") repeat-x;
-  opacity: 0.25;
+  opacity: 0.2;
   animation: cloudsMove 120s linear infinite;
   pointer-events: none;
-  z-index: 3;
 }
 
 @keyframes cloudsMove {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to { transform: translateX(-50%); }
 }
 
 /* ========================= */
-/* FOGO REALISTA */
+/* LUA */
 /* ========================= */
 
-.fire-left,
-.fire-right {
+.moon-glow {
   position: absolute;
-  bottom: 22%;
-  width: 180px;
-  height: 320px;
-  z-index: 4;
-}
-
-.fire-left { left: 14%; }
-.fire-right { right: 14%; }
-
-/* chama externa */
-.fire-left::before,
-.fire-right::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 85%,
-    rgba(255,200,0,1) 0%,
-    rgba(255,100,0,0.9) 30%,
-    rgba(255,0,0,0.6) 60%,
-    transparent 80%);
-  border-radius: 50% 50% 40% 40%;
-  filter: blur(10px);
-  animation: flameRise 0.2s infinite ease-in-out alternate;
-}
-
-/* chama interna */
-.fire-left::after,
-.fire-right::after {
-  content: "";
-  position: absolute;
-  width: 60%;
-  height: 70%;
-  left: 20%;
-  bottom: 0;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle,
-    rgba(255,255,180,1),
-    rgba(255,140,0,0.9),
+    rgba(255,255,255,0.5),
     transparent 70%);
-  border-radius: 50%;
-  filter: blur(6px);
-  animation: flameInner 0.15s infinite ease-in-out alternate;
+  animation: moonPulse 6s infinite alternate;
+  pointer-events: none;
 }
 
-@keyframes flameRise {
-  from {
-    transform: scaleY(1) scaleX(1);
-  }
-  to {
-    transform: scaleY(1.25) scaleX(0.85) translateY(-15px);
-  }
-}
-
-@keyframes flameInner {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.3) translateY(-10px);
-  }
+@keyframes moonPulse {
+  from { opacity: 0.4; }
+  to { opacity: 0.8; }
 }
