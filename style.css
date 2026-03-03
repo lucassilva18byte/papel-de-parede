@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: radial-gradient(circle at center, #0a0a1a 0%, #000 80%);
+}
+
+.scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  animation: cameraMove 20s infinite alternate ease-in-out;
+}
+
+/* Céu estrelado */
+.stars {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: transparent;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 3px 3px;
+  animation: starsMove 60s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes starsMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+.moon {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #fff 30%, #ccc 70%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 60px rgba(255,255,255,0.6);
+}
+
+/* Castelo */
+.castle {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  background: #111;
+  clip-path: polygon(10% 100%, 10% 50%, 20% 40%, 30% 50%, 30% 100%, 40% 100%, 40% 30%, 50% 20%, 60% 30%, 60% 100%, 70% 100%, 70% 50%, 80% 40%, 90% 50%, 90% 100%);
+  transform: translateX(-50%);
+}
+
+/* Tochas */
+.torches {
+  position: absolute;
+  bottom: 25%;
+  width: 20px;
+  height: 80px;
+  background: #222;
+}
+
+.torches.left { left: 20%; }
+.torches.right { right: 20%; }
+
+.torches::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, orange 20%, red 60%, transparent 70%);
+  border-radius: 50%;
+  animation: fire 0.2s infinite alternate;
+}
+
+@keyframes fire {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+/* Cavaleiro */
+.knight {
+  position: absolute;
+  bottom: 10%;
+  left: 40%;
+  width: 100px;
+  height: 200px;
+  background: linear-gradient(#111, #333);
+  border-radius: 20px;
+}
+
+.cape {
+  position: absolute;
+  width: 120px;
+  height: 220px;
+  background: linear-gradient(#000, #222);
+  left: -10px;
+  top: 0;
+  border-radius: 40px;
+  animation: capeMove 3s infinite ease-in-out;
+}
+
+@keyframes capeMove {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Princesa */
+.princess {
+  position: absolute;
+  bottom: 10%;
+  left: 55%;
+  width: 90px;
+  height: 180px;
+  background: linear-gradient(#5b2a86, #3a0f58);
+  border-radius: 50px;
+  animation: dressMove 4s infinite ease-in-out;
+}
+
+@keyframes dressMove {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Névoa */
+.fog {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 40%;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 70%);
+  animation: fogMove 15s infinite linear;
+}
+
+@keyframes fogMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-200px); }
+}
+
+/* Movimento de câmera */
+@keyframes cameraMove {
+  from { transform: scale(1) translateY(0); }
+  to { transform: scale(1.05) translateY(-10px); }
+}
+
+/* Responsivo para celular */
+@media (max-width: 768px) {
+  .castle { width: 250px; height: 200px; }
+  .moon { width: 100px; height: 100px; }
+}
