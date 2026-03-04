@@ -1,92 +1,61 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    background: #000;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.wallpaper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+body {
+  overflow: hidden;
+  background: black;
 }
 
-.layer {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+.scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
-/* Castelo leve zoom */
-.castelo {
-    animation: zoomCastelo 20s ease-in-out infinite alternate;
+/* FUNDO COMPLETO */
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-/* Lua pulsando */
-.lua {
-    bottom: 80%;
-    animation: pulseLua 5s ease-in-out infinite;
+/* PERSONAGEM */
+.character {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
 }
 
-/* Névoa se movendo horizontal */
-.nevoa {
-    bottom: 0;
-    animation: moveNevoa 60s linear infinite;
+/* CAPA */
+.cape {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Cavaleiro capa tremulando / flutuação */
-.cavaleiro {
-    animation: floatCavaleiro 3s ease-in-out infinite alternate;
+/* CORPO */
+.body {
+  position: relative;
+  width: 100%;
+  z-index: 2;
 }
 
-/* Princesa cabelo balançando / flutuação */
-.princesa {
-    animation: floatPrincesa 3s ease-in-out infinite alternate;
-    animation-delay: 0.2s;
-}
-
-/* Fogueira animada */
-.fogueira {
-    bottom: 20px;
-}
-
-/* Animações */
-@keyframes zoomCastelo {
-    0% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.02); }
-    100% { transform: translateX(-50%) scale(1); }
-}
-
-@keyframes pulseLua {
-    0%,100% { opacity: 1; transform: translateX(-50%) scale(1); }
-    50% { opacity: 0.85; transform: translateX(-50%) scale(1.05); }
-}
-
-@keyframes moveNevoa {
-    0% { left: -30%; }
-    100% { left: 130%; }
-}
-
-@keyframes floatCavaleiro {
-    0% { transform: translate(-50%, 0) rotate(0deg); }
-    50% { transform: translate(-50%, -10px) rotate(1deg); }
-    100% { transform: translate(-50%, 0) rotate(0deg); }
-}
-
-@keyframes floatPrincesa {
-    0% { transform: translate(-50%, 0) rotate(0deg); }
-    50% { transform: translate(-50%, -8px) rotate(-1deg); }
-    100% { transform: translate(-50%, 0) rotate(0deg); }
-}
-
-canvas#particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+/* CABEÇA */
+.head {
+  position: absolute;
+  width: 40%;
+  top: 5%;
+  left: 30%;
+  z-index: 3;
+  pointer-events: none;
 }

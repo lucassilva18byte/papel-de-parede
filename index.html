@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Fantasy Wallpaper</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Dark Fantasy</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wallpaper">
-    <img src="castelo.png" class="layer castelo">
-    <img src="lua.png" class="layer lua">
-    <img src="nevoa.png" class="layer nevoa">
-    <img src="fogueira.png" class="layer fogueira">
-    <img src="cavaleiro.png" class="layer cavaleiro">
-    <img src="princesa.png" class="layer princesa">
+
+<div class="scene">
+
+  <!-- FUNDO (campo + castelo) -->
+  <img src="assets/background.jpg" class="background">
+
+  <!-- PERSONAGEM -->
+  <div class="character">
+
+      <!-- CAPA (atrás) -->
+      <video class="cape" autoplay loop muted playsinline>
+        <source src="assets/cape.webm" type="video/webm">
+      </video>
+
+      <!-- CORPO -->
+      <img src="assets/body.png" class="body">
+
+      <!-- CABEÇA (na frente) -->
+      <video class="head" autoplay loop muted playsinline>
+        <source src="assets/head.webm" type="video/webm">
+      </video>
+
+  </div>
+
 </div>
-<canvas id="particles"></canvas>
-<script src="script.js"></script>
+
 </body>
 </html>
