@@ -20,37 +20,15 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 0;
 }
 
-/* PERSONAGEM */
-.character {
+/* CAVALEIRO */
+.knight {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px; /* controla tamanho geral */
-}
-
-/* CAPA */
-.cape {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
+  width: 500px; /* ajusta tamanho aqui */
   z-index: 1;
-}
-
-/* CORPO */
-.body {
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-
-/* CABEÇA */
-.head {
-  position: absolute;
-  width: 38%;
-  top: 40px;   /* ajuste fino */
-  left: 31%;   /* ajuste fino */
-  z-index: 3;
 }
